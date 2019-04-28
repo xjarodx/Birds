@@ -1,0 +1,25 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-image: url('../html_Images/birds_back.jpg');
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%;
+    background-position: right bottom, right bottom;
+}
+
+#search {
+    padding-right: 55%;
+    padding-top: 30%;    
+}
+
+#seabird {
+    float: center;
+    padding-right: 60%;
+    visibility: hidden;
+    width: 50%;
+}
+
+
