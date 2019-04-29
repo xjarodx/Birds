@@ -14,18 +14,21 @@
     <title>Bird is the Word</title>
   </head>
   <body>
-    <div class="container">  
-        <div id="search" class="container col-md-2">
-            <a href="#/" onclick="openFileLoad()">
-                <img src="html_Images/birdIconWithText.png" width="214px" height="214px"/>
-            </a>
-        </div>
-        <div id="seabird" class="custom-file col-md-9">
+    <div class="row">
+      <div id="search" class="container">  
+        <a href="#/" onclick="openFileLoad()">
+            <img src="html_Images/birdIconWithText.png" width="214px" height="214px"/>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container col-smd-4">  
+        <div id="seabird" class="custom-file">
             <input type="file" class="custom-file-input" id="customFile">
             <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
+      </div>
     </div>
-
     <!-- JavaScript -->
     <!-- custom first, then jQuery, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript" src="static/func.js"></script>

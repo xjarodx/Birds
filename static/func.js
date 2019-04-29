@@ -1,7 +1,9 @@
-function openFileLoad(){
-    document.getElementById('seabird').style.visibility = 'visible';
-}
+function openFileLoad() {
+    var x = document.getElementById("seabird");
+    if (x.style.visibility === "hidden") {
+      x.style.visibility = "visible";
+    } else {
+      x.style.visibility = "hidden";
+    }
+  } 
 
-function openFileLoad(){
-    document.getElementById('seabird').style.visibility = 'visible';
-}
