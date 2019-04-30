@@ -15,14 +15,14 @@ graph = None
 
 # Loading a keras model with flask
 # https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
-def load_model():
-    global model
-    global graph
-    model = keras.models.load_model("mnist_trained.h5")
-    graph = K.get_session().graph
+#def load_model():
+#    global model
+#    global graph
+#    model = keras.models.load_model("mnist_trained.h5")
+#    graph = K.get_session().graph
 
 
-load_model()
+#load_model()
 
 
 def prepare_image(img):
@@ -36,6 +36,7 @@ def prepare_image(img):
     image_array = img.flatten().reshape(-1, 28 * 28)
     # Return the processed feature array
     return image_array
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -78,7 +79,10 @@ def upload_file():
                 # indicate that the request was a success
                 data["success"] = True
 
+                def scrap_wiki():
+
             return jsonify(data)
+
     return '''
     <!doctype html>
     <title>Upload new File</title>
