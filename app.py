@@ -1,5 +1,6 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+import scrape_wiki
 
 import keras
 from keras.preprocessing import image
