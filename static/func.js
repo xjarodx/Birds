@@ -7,3 +7,7 @@ function openFileLoad() {
     }
   } 
 
+function gotIt() {
+  var q = document.getElementById("search");
+
+}

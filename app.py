@@ -40,6 +40,7 @@ def prepare_image(img):
 
 
 @app.route('/', methods=['GET', 'POST'])
+
 def upload_file():
     data = {"success": False}
     if request.method == 'POST':
@@ -69,30 +70,22 @@ def upload_file():
             print(image_array)
 
             # Get the tensorflow default graph and use it to make predictions
-            global graph
-            with graph.as_default():
+            #global graph
+            #with graph.as_default():
 
                 # Use the model to make a prediction
-                predicted_digit = model.predict_classes(image_array)[0]
-                data["prediction"] = str(predicted_digit)
+                #predicted_digit = model.predict_classes(image_array)[0]
+                #data["prediction"] = str(predicted_digit)
 
                 # indicate that the request was a success
-                data["success"] = True
+                #data["success"] = True
 
-                def scrap_wiki():
+                #def scrape_wiki():
 
-            return jsonify(data)
+            #return jsonify(data)
+            
 
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
-
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,14 +1,23 @@
+@font-face {
+    font-family: 'MyWebFont';
+    src:  url('miss_smarty_pants_skinny-webfont.woff2') format('woff2'),
+          url('https://drive.google.com/open?id=1ezByshuz1hyVClhbz6M8JW25_DZxaiao') format('woff'),
+          url('Miss-Smarty-Pants-Skinny.ttf') format('truetype');
+    font-weight: normal;
+  }
+
 html,
 body {
     height: 100%;
 }
 
 body {
-    background-image: url('../html_Images/birds_back.jpg');
+    background-image: url('/static/html_Images/birds_back.jpg');
     background-repeat: no-repeat;
     background-size: 50%;
     background-attachment: scroll;
     background-position: right bottom;
+    z-index: -1;
 }
 
 #search {
@@ -18,9 +27,12 @@ body {
 
 #seabird {
     visibility: hidden;
-    float: left;
-    padding-top: 100px;
-    padding-left: 250px;
+    float:left;
+    padding-top: 80px;
+    padding-left: 178px;
     width: 30%;
 }
 
+#seabird p{
+    font-family: 'MyWebFont', Fallback, sans-serif;
+}
