@@ -7,6 +7,12 @@ from keras.preprocessing import image
 from keras import backend as K
 from keras.models import load_model
 from keras.preprocessing.image import img_to_array, load_img
+import tensorflow as tf
+import numpy as np
+import pandas as pd
+
+#need to use this in the prepare_image() and upload_file()
+img_width, img_height = 150, 150
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -25,6 +31,14 @@ def load_model():
     preds = test_model.predict_classes(x)
     probs = test_model.predict_proba(x)
     print(preds, probs)
+    img_id = test_model.predict_classes(x)[0]
+
+    file = "../data/classes.csv"
+    file_df = pd.read_csv(file)
+
+    birdClass = file_df.loc[file_df["id"] == img_id]["name"].unique()[0]
+
+    return birdClass
 
 #load_model()
 
@@ -37,7 +51,7 @@ def prepare_image(img):
     # Invert the pixels
     img = 1 - img
     # Flatten the image to an array of pixels
-    image_array = img.flatten().reshape(-1, 28 * 28)
+    image_array = img.flatten().reshape(-1, img_width * img_height)
     # Return the processed feature array
     return image_array
 
@@ -65,7 +79,7 @@ def upload_file():
 
             # Load the saved image using Keras and resize it to the mnist
             # format of 28x28 pixels
-            image_size = (28, 28)
+            image_size = (img_width, img_height)
             im = image.load_img(filepath, target_size=image_size,
                                 grayscale=True)
 
