@@ -16,30 +16,27 @@
     
     <title>Bird is the Word</title>
   </head>
+
   <body>
     <div class="row">
-      <div id="search" class="container">  
-        <a href="#/" onclick="openFileLoad()">
-            <img src="/static/html_Images/birdIconWithText.png" width="275px" height="275px"/>
-        </a>
+      <div id="search" class="container col-md-4">  
+        <img src="/static/html_Images/birdIconWithText.png" width="275px" height="275px" onclick="openFileLoad()"/>
       </div>
+      <div id="wikipic" class="col-md-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Landsvale.jpg" width="250px" height="250px" />
+      </div>
+      <div id="spacer" class="container col-md-4"></div>
     </div>
     <div class="row">
-      <div id="seabird" class="container col-md-5"> 
-        <p>That looks like my cousin.</p> 
-     <!--  <div  class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile" action='/'>
-            <label class="custom-file-label" for="customFile">Choose file</label>
-            <button class="btn btn-primary" type="submit" value=Upload>Upload</button> -->
+      <div id="seabird" class="container col-md-7"> 
           <form method=post enctype=multipart/form-data>
             <input type=file name=file>
-            <input type=submit value=Upload onclick="gotIt()">
+            <input type=submit value=Upload onclick="gotIt()"/>
           </form>
-      <!--  </div> -->          
       </div>
-      <div id="spaceer" class="container col-md-7">
-      </div>
+      <div id="spacer" class="container col-md-5"></div>
     </div>
+
     <!-- JavaScript -->
     <!-- custom first, then jQuery, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript" src="/static/func.js"></script>

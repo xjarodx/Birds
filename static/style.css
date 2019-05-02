@@ -33,6 +33,7 @@ body {
     width: 30%;
 }
 
-#seabird p{
-    font-family: 'MyWebFont', Fallback, sans-serif;
+#wikipic {
+    padding-left: 128px;
+    padding-top: 200px;
 }
