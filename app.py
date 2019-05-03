@@ -1,7 +1,6 @@
 import os
 from flask import Flask, request, jsonify, render_template
-import scrape_wiki
-
+#import scrape_wiki
 import keras
 from keras.preprocessing import image
 from keras import backend as K
@@ -23,9 +22,9 @@ graph = None
 
 # Loading a keras model with flask
 # https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
-def load_model():
+def load_model(filename):
     test_model = load_model('/jill/birds_model.h5')
-    img = load_img('image_to_predict.jpg',False,target_size=(img_width,img_height))
+    img = load_img(filename,False,target_size=(img_width,img_height))
     x = img_to_array(img)
     x = np.expand_dims(x, axis=0)
     preds = test_model.predict_classes(x)
@@ -40,7 +39,7 @@ def load_model():
 
     return birdClass
 
-#load_model()
+#load_model(filename)
 
 
 def prepare_image(img):
@@ -55,6 +54,51 @@ def prepare_image(img):
     # Return the processed feature array
     return image_array
 
+def scrape_wiki(filename):
+
+    bird = load_model(filename)
+    all_tables = {}
+    bird_data={}
+        
+    executable_path = {'executable_path': 'chromedriver.exe'}
+    browser = Browser('chrome', **executable_path, headless=False)
+
+    my_url = 'https://en.wikipedia.org/wiki/' + bird
+    browser.visit(my_url)
+    
+    ## giving it a bit of time to load before pulling info ###
+    #time.sleep(1) 
+    url_html = browser.html
+
+    ### Table Pull ###
+
+    tables = pd.read_html(url_html)
+    #tables[0]
+    df = tables[0]
+    df.columns = ['About']
+    bird_facts_html = df.to_html(index=False, classes="table-hover table-dark table-sm")
+    bird_data["facts_table"] = bird_facts_html
+
+    # x = len(tables)
+    # x    
+
+    # for i in range (0, x):
+    #     table = tables[i]
+    #     all_tables[f'tables_{i}']=table
+
+    # scrape_data = tables[0]
+    # scrape_data
+
+    ### Image pulls ###
+
+    response = requests.get(url_html)
+    soup = bs(response.text, 'html.parser')
+
+    image_tags = soup.findAll('img')
+
+    bird_img = image_tags[1].get("src")
+    
+    loc_img = image_tags[4].get("src")
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -101,9 +145,32 @@ def upload_file():
                 #def scrape_wiki():
 
             #return jsonify(data)
-            
+            obj = {
+                "bird": {
+                    "facts_table": [
+                        'fact 1',
+                        'fact 2',
+                        'fact 3',
+                        'fact 4'
+                    ],
+                    "safe_table": [
+                        'fact 1',
+                        'fact 2',
+                        'fact 3',
+                        'fact 4'
+                    ],
+                    "img": "http://www.google.images/image.jpg"
+                }
+            }
 
-    return render_template('index.html')
+def scrape():
+    bird_data = scrape_wiki(filename)
+    #print(bird_data)
+    coll.update({},bird_data, upsert = True)
+
+    return render_template('index.html', bird_data=obj)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

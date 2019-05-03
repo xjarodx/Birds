@@ -34,6 +34,13 @@ body {
 }
 
 #wikipic {
+    visibility: hidden;
     padding-left: 128px;
     padding-top: 200px;
+}
+
+#wikitable {
+    visibility: hidden;
+    padding-left: 128px;
+    padding-top: 50px;
 }
