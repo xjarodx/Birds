@@ -101,10 +101,8 @@ def scrape_wiki(filename):
     loc_img = image_tags[4].get("src")
 
 
-@app.route('/', methods=['GET', 'POST'])
-
-def upload_file():
-    data = {"success": False}
+@app.route('/post_file', methods=['POST'])
+def upload_files():
     if request.method == 'POST':
         print(request)
 
@@ -145,26 +143,32 @@ def upload_file():
                 #def scrape_wiki():
 
             #return jsonify(data)
-            obj = {
-                "bird": {
-                    "facts_table": [
-                        'fact 1',
-                        'fact 2',
-                        'fact 3',
-                        'fact 4'
-                    ],
-                    "safe_table": [
-                        'fact 1',
-                        'fact 2',
-                        'fact 3',
-                        'fact 4'
-                    ],
-                    "img": "http://www.google.images/image.jpg"
-                }
-            }
 
-    return render_template('index.html', bird_data=obj)
+            return redirect('/')
+
+@app.route('/', methods=['GET'])
+
+def render_page():
     
+    obj1 = {
+        "bird": {
+            "facts_table": [
+                'fact 1',
+                'fact 2',
+                'fact 3',
+                'fact 4'
+            ],
+            "safe_table": [
+                'fact 1',
+                'fact 2',
+                'fact 3',
+                'fact 4'
+            ],
+            "img": "http://www.google.images/image.jpg"
+        }
+    }
+
+    return render_template('index.html', bird_data=obj1)    
 
 @app.route("/scrape")
 def scrape():
