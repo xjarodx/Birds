@@ -44,3 +44,20 @@ body {
     padding-left: 128px;
     padding-top: 50px;
 }
+
+#seabird2 {
+    float:left;
+    padding-top: 80px;
+    padding-left: 178px;
+    width: 30%;
+}
+
+#wikipic2 {
+    padding-left: 128px;
+    padding-top: 200px;
+}
+
+#wikitable2 {
+    padding-left: 128px;
+    padding-top: 50px;
+}

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect
 #import scrape_wiki
 import keras
 from keras.preprocessing import image
@@ -101,7 +101,7 @@ def scrape_wiki(filename):
     loc_img = image_tags[4].get("src")
 
 
-@app.route('/post_file', methods=['POST'])
+@app.route('/postfile', methods=['POST'])
 def upload_files():
     if request.method == 'POST':
         print(request)
@@ -146,7 +146,10 @@ def upload_files():
 
             return redirect('/')
 
-@app.route('/', methods=['GET'])
+    else:
+        return render_template('index.html')
+
+@app.route('/', methods=['GET', 'POST'])
 
 def render_page():
     
@@ -167,18 +170,18 @@ def render_page():
             "img": "http://www.google.images/image.jpg"
         }
     }
-
+    
     return render_template('index.html', bird_data=obj1)    
 
 @app.route("/scrape")
 def scrape():
-    bird_data = scrape_wiki(filename)
-
-    print(bird_data)
-
     
-    coll.update({},bird_data, upsert = True)
+    #bird_data = scrape_wiki(filename)
+    print(bird_data)
+    
+    #coll.update({},bird_data, upsert = True)
     return redirect('/')
+
 
 
 if __name__ == "__main__":
