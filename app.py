@@ -3,8 +3,11 @@ from flask import Flask, request, jsonify, render_template, redirect
 import tensorflow as tf
 import numpy as np
 import pandas as pd
-import datetime as time
+import datetime as dt
 import requests
+import time
+from splinter import Browser
+from bs4 import BeautifulSoup as bs
 #import scrape_wiki
 
 import keras
@@ -12,7 +15,6 @@ from keras.preprocessing import image
 from keras import backend as K
 from keras.models import load_model
 from keras.preprocessing.image import img_to_array, load_img
-
 
 
 app = Flask(__name__)
@@ -138,7 +140,7 @@ def load_model(filename):
         # Flatten the image to an array of pixels
         #image_array = img.flatten().reshape(-1, img_width * img_height)
         # Return the processed feature array
-        
+
     return birdClass, filename
 
 @app.route('/postfile', methods=['POST'])
