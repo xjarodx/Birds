@@ -5,6 +5,8 @@ import scrape_wiki
 import keras
 from keras.preprocessing import image
 from keras import backend as K
+from keras.models import load_model
+from keras.preprocessing.image import img_to_array, load_img
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -15,12 +17,14 @@ graph = None
 
 # Loading a keras model with flask
 # https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
-#def load_model():
-#    global model
-#    global graph
-#    model = keras.models.load_model("mnist_trained.h5")
-#    graph = K.get_session().graph
-
+def load_model():
+    test_model = load_model('/jill/birds_model.h5')
+    img = load_img('image_to_predict.jpg',False,target_size=(img_width,img_height))
+    x = img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    preds = test_model.predict_classes(x)
+    probs = test_model.predict_proba(x)
+    print(preds, probs)
 
 #load_model()
 
