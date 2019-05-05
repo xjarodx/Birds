@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, render_template, redirect
+from flask import Flask, request, jsonify, render_template, redirect, send_from_directory
 import tensorflow as tf
 import numpy as np
 import pandas as pd
@@ -106,13 +106,13 @@ def scrape_wiki(filename):
 
 @app.route('/processImg', methods=['GET'])
 
-def load_model():
+def load_model(image):
     print ("made it to load model")
     #need to use this in the prepare_image() and upload_file()
     img_width, img_height = 150, 150
 
     test_model = load_model('/jill/birds_model.h5')
-    img = load_img(filename,False,target_size=(img_width,img_height))
+    img = load_img(image1,False,target_size=(img_width,img_height))
 
     x = img_to_array(img)
     x = np.expand_dims(x, axis=0)
@@ -141,7 +141,7 @@ def load_model():
         #image_array = img.flatten().reshape(-1, img_width * img_height)
         # Return the processed feature array
 
-    return birdClass, filename
+    return (birdClass, 'scrape_wiki')
 
 @app.route('/postfile', methods=['POST'])
 def upload_files():
@@ -170,7 +170,7 @@ def upload_files():
             # image_array = prepare_image(im)
             # print(image_array)
             time.sleep(1)
-            return redirect('/processImg')
+            return send_from_directory('uploads', filename, as_attatchment=True)
 
     else:
         return render_template('index.html')
