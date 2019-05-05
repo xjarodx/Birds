@@ -59,7 +59,7 @@ graph = None
 #     return image_array
 
 def scrape_wiki(filename):
-
+    print("made it to the scrape")
     bird = load_model(filename)
     all_tables = {}
     bird_data={}
@@ -104,10 +104,10 @@ def scrape_wiki(filename):
     
     loc_img = image_tags[4].get("src")
 
-@app.route('/processImg', methods=['GET', 'POST'])
+@app.route('/processImg', methods=['GET'])
 
-def load_model(filename):
-    
+def load_model():
+    print ("made it to load model")
     #need to use this in the prepare_image() and upload_file()
     img_width, img_height = 150, 150
 
@@ -147,7 +147,7 @@ def load_model(filename):
 def upload_files():
     if request.method == 'POST':
         print(request)
-
+        print('made it to postfile and req meth does equal post')
         if request.files.get('file'):
             # read the file
             file = request.files['file']
@@ -170,7 +170,7 @@ def upload_files():
             # image_array = prepare_image(im)
             # print(image_array)
             time.sleep(1)
-            return filename, redirect('/processImg')
+            return redirect('/processImg')
 
     else:
         return render_template('index.html')
@@ -178,7 +178,7 @@ def upload_files():
 @app.route('/', methods=['GET', 'POST'])
 
 def render_page():
-    
+    print("made it to render page")
     obj1 = {
         "bird": {
             "facts_table": [
