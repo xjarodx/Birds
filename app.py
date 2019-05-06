@@ -22,7 +22,7 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 model = None
 graph = None
-
+g=''
 
 # Loading a keras model with flask
 # https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
@@ -112,7 +112,7 @@ def load_model(image):
     img_width, img_height = 150, 150
 
     test_model = load_model('/jill/birds_model.h5')
-    img = load_img(image1,False,target_size=(img_width,img_height))
+    img = load_img(g,False,target_size=(img_width,img_height))
 
     x = img_to_array(img)
     x = np.expand_dims(x, axis=0)
@@ -160,7 +160,7 @@ def upload_files():
 
             # Save the file to the uploads folder
             file.save(filepath)
-
+            g=filepath
             # Load the saved image and resize it to the mnist
             # image_size = (img_width, img_height)
             # im = image.load_img(filepath, target_size=image_size,
@@ -170,7 +170,10 @@ def upload_files():
             # image_array = prepare_image(im)
             # print(image_array)
             time.sleep(1)
-            return send_from_directory('uploads', filename, as_attatchment=True)
+            # return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               # filename, as_attachment=True)
+            print(g)
+            return redirect('/processImg')
 
     else:
         return render_template('index.html')
