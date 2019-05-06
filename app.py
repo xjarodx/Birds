@@ -20,7 +20,7 @@ from keras.preprocessing.image import img_to_array, load_img
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
-model = None
+model = load_model('jill/birds_model.h5')
 graph = None
 g=''
 
@@ -104,14 +104,15 @@ def scrape_wiki(filename):
     
     loc_img = image_tags[4].get("src")
 
-@app.route('/processImg', methods=['GET'])
+@app.route('/processImg', methods=['GET','POST'])
 
-def load_model(image):
+def predict():
     print ("made it to load model")
+    #data=g
     #need to use this in the prepare_image() and upload_file()
     img_width, img_height = 150, 150
 
-    test_model = load_model('/jill/birds_model.h5')
+    # test_model = load_model('/jill/birds_model.h5')
     img = load_img(g,False,target_size=(img_width,img_height))
 
     x = img_to_array(img)
@@ -123,11 +124,12 @@ def load_model(image):
 
     img_id = test_model.predict_classes(x)[0]
 
-    file = "../data/classes.csv"
-    file_df = pd.read_csv(file)
+    classFile = "data/classes.csv"
+    file_df = pd.read_csv(classFile)
 
     birdClass = file_df.loc[file_df["id"] == img_id]["name"].unique()[0]
-
+    print (birdClass)
+    print('past birdclass')
     #return birdClass
 
     #def prepare_image(img):
@@ -141,7 +143,7 @@ def load_model(image):
         #image_array = img.flatten().reshape(-1, img_width * img_height)
         # Return the processed feature array
 
-    return (birdClass, 'scrape_wiki')
+    return redirect('/scrape_wiki')
 
 @app.route('/postfile', methods=['POST'])
 def upload_files():
