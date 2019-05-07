@@ -22,12 +22,12 @@
       <div id="search" class="container col-md-4">  
         <img src="/static/html_Images/birdIconWithText.png" width="275px" height="275px" onclick="openFileLoad()"/>
       </div>
-      <div id="wikipic" class="col-md-4">
+     <!-- <div id="wikipic" class="col-md-4">
         <img id="bird" src="#" width="250px" height="250px" />
         <img id="map" src="#" width="250px" height="250px" />\
       </div>
       <div id="spacer" class="container col-md-4"></div>
-    </div>
+    </div>-->
     <div class="row">
       <div id="seabird" class="container col-md-7"> 
           <form action='http://127.0.0.1:5000/postfile' method='POST'enctype=multipart/form-data>
@@ -35,14 +35,14 @@
             <input type=submit value=Upload onclick="gotIt()"/>
           </form>
       </div>
-      <div id="wikitable" class="col-md-4">
+      <!--<div id="wikitable" class="col-md-4">
           {% for bird_fact in bird_data.bird.facts_table %}
                 <p>{{bird_fact}}</p>
           {% endfor %}
           <img src={{bird_data.bird.img}} />
         </div>
       <div id="spacer" class="container col-md-5"></div>
-    </div>
+    </div>-->
 
     <!-- JavaScript -->
     <!-- custom first, then jQuery, then Popper.js, then Bootstrap JS -->

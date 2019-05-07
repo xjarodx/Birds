@@ -28,25 +28,25 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 def render_page():
     print("made it to render page")
-    # obj1 = {
-    #     "bird": {
-    #         "facts_table": [
-    #             'fact 1',
-    #             'fact 2',
-    #             'fact 3',
-    #             'fact 4'
-    #         ],
-    #         "safe_table": [
-    #             'fact 1',
-    #             'fact 2',
-    #             'fact 3',
-    #             'fact 4'
-    #         ],
-    #         "img": "http://www.google.images/image.jpg"
-    #     }
-    # }
+    obj1 = {
+        "bird": {
+            "facts_table": [
+                'fact 1',
+                'fact 2',
+                'fact 3',
+                'fact 4'
+            ],
+            "safe_table": [
+                'fact 1',
+                'fact 2',
+                'fact 3',
+                'fact 4'
+            ],
+            "img": "http://www.google.images/image.jpg"
+        }
+    }
     
-    return render_template('index.html')#, bird_data=obj1)
+    return render_template('index.html', bird_data=obj1)
 
 
 @app.route('/postfile', methods=['POST'])
@@ -125,31 +125,31 @@ def predict():
 
     ## giving it a bit of time to load before pulling info ###
     
-    time.sleep(1) 
+    #time.sleep(1) 
     url_html = browser.html
 
     ### Table Pull ###
 
     tables = pd.read_html(url_html)
-    print(tables)
+    #print(tables[0])
     #tables[0]
     df = tables[0]
     print(df)
-    df.columns = ['About']
+    df.column = ['About']
     bird_facts_html = df.to_html(index=False, classes="table-hover table-dark table-sm")
     bird_data["facts_table"] = bird_facts_html
     print('Got the data')
-
+    #browser.quit
     ### Image pulls ###
 
-    response = requests.get(url_html)
-    soup = bs(response.text, 'html.parser')
+    # response = requests.get(url_html)
+    # soup = bs(response.text, 'html.parser')
 
-    image_tags = soup.findAll('img')
+    # image_tags = soup.findAll('img')
 
-    bird_img = image_tags[1].get("src")
-    print('got first image')
-    loc_img = image_tags[4].get("src")
+    # bird_img = image_tags[1].get("src")
+    # print('got first image')
+    # loc_img = image_tags[4].get("src")
 
     return render_template('return.html')
 
