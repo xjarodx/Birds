@@ -22,7 +22,6 @@ from keras.layers import Activation, Dropout, Flatten, Dense
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
-# g=''
 
 @app.route('/', methods=['GET', 'POST'])
 
@@ -112,7 +111,6 @@ def predict():
     print (birdClass)
 
     print("made it to the scrape")
-    #bird = birdClass
     all_tables = {}
     bird_data={}
         
@@ -122,79 +120,33 @@ def predict():
     my_url = 'https://en.wikipedia.org/wiki/' + birdClass
     browser.visit(my_url)
     print(my_url)
-
-    ## giving it a bit of time to load before pulling info ###
     
-    #time.sleep(1) 
     url_html = browser.html
 
     ### Table Pull ###
 
     tables = pd.read_html(url_html)
-    #print(tables[0])
-    #tables[0]
+
     df = tables[0]
     print(df)
-    df.column = ['About']
-    bird_facts_html = df.to_html(index=False, classes="table-hover table-dark table-sm")
+    
+    bird_facts_html = df.to_html(index=False, classes="table-hover table-sm")
     bird_data["facts_table"] = bird_facts_html
     print('Got the data')
-    #browser.quit
+    
     ### Image pulls ###
 
-    # response = requests.get(url_html)
-    # soup = bs(response.text, 'html.parser')
+    response = requests.get(my_url)
+    soup = bs(response.text, 'html.parser')
 
-    # image_tags = soup.findAll('img')
+    image_tags = soup.findAll('img')
 
-    # bird_img = image_tags[1].get("src")
-    # print('got first image')
-    # loc_img = image_tags[4].get("src")
-
-    return render_template('return.html')
-
-
-# Loading a keras model with flask
-# https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
-# def load_model(filename):
-#     test_model = load_model('/jill/birds_model.h5')
-#     img = load_img(filename,False,target_size=(img_width,img_height))
-#     x = img_to_array(img)
-#     x = np.expand_dims(x, axis=0)
-#     preds = test_model.predict_classes(x)
-#     probs = test_model.predict_proba(x)
-#     print(preds, probs)
-#     img_id = test_model.predict_classes(x)[0]
-
-#     file = "../data/classes.csv"
-#     file_df = pd.read_csv(file)
-
-#     birdClass = file_df.loc[file_df["id"] == img_id]["name"].unique()[0]
-
-#     return birdClass
-
-# #load_model(filename)
-
-
-# def prepare_image(img):
-#     # Convert the image to a numpy array
-#     img = image.img_to_array(img)
-#     # Scale from 0 to 255
-#     img /= 255
-#     # Invert the pixels
-#     img = 1 - img
-#     # Flatten the image to an array of pixels
-#     image_array = img.flatten().reshape(-1, img_width * img_height)
-#     # Return the processed feature array
-#     return image_array
-
-
-# @app.route("/scrape_wiki")
-
-# def scrape_wiki():
-    
-
-
+    bird_img = image_tags[0].get("src")
+    print(bird_img)
+    loc_img = image_tags[3].get("src")
+    print(loc_img)
+    browser.quit()
+    return render_template('return.html', bird_data=bird_data, bird_img=bird_img, bird_loc=loc_img)
 
 if __name__ == "__main__":
     app.run(debug=True)

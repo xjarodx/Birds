@@ -22,10 +22,10 @@
       <div id="search" class="container col-md-4">  
         <img src="/static/html_Images/birdIconWithText.png" width="275px" height="275px" onclick="openFileLoad()"/>
       </div>
-      <!--<div id="wikipic2" class="col-md-4">
-        <img id="bird" src="#" width="250px" height="250px" />
-        <img id="map" src="#" width="250px" height="250px" />\
-      </div>-->
+      <div id="wikipic2" class="col-md-4">
+        <img id="bird" src="{{bird_img}}" width=100% />
+        <img id="map" src="{{bird_loc}}" width=100% />\
+      </div>
       <div id="spacer" class="container col-md-4"></div>
     </div>
     <div class="row">
@@ -36,10 +36,7 @@
           </form>
       </div>
       <div id="wikitable2" class="col-md-4">
-          {% for bird_fact in bird_data.bird.facts_table %}
-                <p>{{bird_fact}}</p>
-          {% endfor %}
-         <!--img src={{bird_data.bird.img}} />-->
+          {{bird_data.facts_table | safe }}
         </div>
       <div id="spacer" class="container col-md-5"></div>
     </div>
