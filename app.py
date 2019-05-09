@@ -26,26 +26,10 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 @app.route('/', methods=['GET', 'POST'])
 
 def render_page():
-    print("made it to render page")
-    obj1 = {
-        "bird": {
-            "facts_table": [
-                'fact 1',
-                'fact 2',
-                'fact 3',
-                'fact 4'
-            ],
-            "safe_table": [
-                'fact 1',
-                'fact 2',
-                'fact 3',
-                'fact 4'
-            ],
-            "img": "http://www.google.images/image.jpg"
-        }
-    }
+
+    #print("made it to render page")  
     
-    return render_template('index.html', bird_data=obj1)
+    return render_template('index.html')
 
 
 @app.route('/postfile', methods=['POST'])
@@ -55,8 +39,8 @@ def upload_files():
     global filepath
 
     if request.method == 'POST':
-        print(request)
-        print('made it to postfile and req meth does equal post')
+        #print(request)
+        #print('made it to postfile and req meth does equal post')
         if request.files.get('file'):
             # read the file
             file = request.files['file']
@@ -69,11 +53,6 @@ def upload_files():
 
             # Save the file to the uploads folder
             file.save(filepath)
-           
-            #g=filepath
-
-            time.sleep(1)
-            #print(g)
 
             return redirect('/processImg')
 
@@ -86,7 +65,7 @@ def upload_files():
 
 def predict():
     
-    print ("made it to load model")
+    #print ("made it to load model")
     
     model = load_model('jill/birds_model5.h5')
     graph = None
@@ -100,7 +79,7 @@ def predict():
     
     preds = model.predict_classes(x)
     probs = model.predict_proba(x)
-    print(preds, probs)
+    #print(preds, probs)
 
     img_id = model.predict_classes(x)[0]
 
@@ -108,9 +87,9 @@ def predict():
     file_df = pd.read_csv(classFile)
 
     birdClass = file_df.loc[file_df["id"] == img_id]["name"].unique()[0]
-    print (birdClass)
+    #print (birdClass)
 
-    print("made it to the scrape")
+    #print("made it to the scrape")
     all_tables = {}
     bird_data={}
         
@@ -119,11 +98,11 @@ def predict():
 
     my_url = 'https://en.wikipedia.org/wiki/' + birdClass
     browser.visit(my_url)
-    print(my_url)   
+    #print(my_url)   
     
     url_html = browser.html
 
-    ### Table Pull ###
+    ### Table Pull and data cleaning ###
 
     tables = pd.read_html(url_html)
 
@@ -134,14 +113,11 @@ def predict():
     df2["About"]=df2["Ab"].map(str) + df2["info"].map(str)
     df3=df2.drop(columns=['Ab', 'info'])
 
-    print(df3)
-    
-    #df1=df['About'].combine_first(df['info'])
-    #print(df1)
+    #print(df3)
 
     bird_facts_html = df3.to_html(index=False, classes="table-light table-hover table-sm", justify='center')
     bird_data["facts_table"] = bird_facts_html
-    print('Got the data')
+    #print('Got the data')
     
     ### Image pulls ###
 
@@ -151,9 +127,9 @@ def predict():
     image_tags = soup.findAll('img')
 
     bird_img = image_tags[0].get("src")
-    print(bird_img)
+    #print(bird_img)
     loc_img = image_tags[3].get("src")
-    print(loc_img)
+    #print(loc_img)
     browser.quit()
     return render_template('return.html', bird_data=bird_data, bird_img=bird_img, bird_loc=loc_img, birdClass=birdClass)
 
