@@ -128,9 +128,18 @@ def predict():
     tables = pd.read_html(url_html)
 
     df = tables[0]
-    print(df)
+    df.rename(index=str, columns={0:"Ab", 1: "info"}, inplace=True)
+    df1=df.dropna(subset=["Ab"])
+    df2=df1.replace(np.nan, '', regex=True)
+    df2["About"]=df2["Ab"].map(str) + df2["info"].map(str)
+    df3=df2.drop(columns=['Ab', 'info'])
+
+    print(df3)
     
-    bird_facts_html = df.to_html(index=False, classes="table-hover table-sm")
+    #df1=df['About'].combine_first(df['info'])
+    #print(df1)
+
+    bird_facts_html = df3.to_html(index=False, classes="table-hover table-sm")
     bird_data["facts_table"] = bird_facts_html
     print('Got the data')
     
