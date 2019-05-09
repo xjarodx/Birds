@@ -33,31 +33,11 @@ body {
     width: 30%;
 }
 
-#wikipic {
-    visibility: hidden;
-    padding-left: 128px;
-    padding-top: 200px;
-}
-
-#wikitable {
-    visibility: hidden;
-    padding-left: 128px;
-    padding-top: 50px;
-}
-
-#seabird2 {
-    float:left;
-    padding-top: 80px;
-    padding-left: 178px;
-    width: 30%;
-}
-
-#wikipic2 {
-    padding-left: 128px;
-    padding-top: 200px;
-}
-
 #wikitable2 {
-    padding-left: 128px;
-    padding-top: 50px;
+    padding: 5em;
+}
+
+#bird {
+    display: inline-block;
+    padding:50px;
 }

@@ -18,27 +18,30 @@
   </head>
 
   <body>
-    <div class="row">
-      <div id="search" class="container col-md-4">  
-        <img src="/static/html_Images/birdIconWithText.png" width="275px" height="275px" onclick="openFileLoad()"/>
+
+    <div class="container col-md-12">
+      <div class="container col-md-3">  
+        <img src="/static/html_Images/birdIcon_thanksForImg.png" width=70%/>
       </div>
-      <div id="wikipic2" class="col-md-4">
-        <img id="bird" src="{{bird_img}}" width=100% />
-        <img id="map" src="{{bird_loc}}" width=100% />\
-      </div>
-      <div id="spacer" class="container col-md-4"></div>
-    </div>
-    <div class="row">
-      <div id="seabird2" class="container col-md-7"> 
-          <form action='http://127.0.0.1:5000/postfile' method='POST'enctype=multipart/form-data>
-            <input type=file name=file>
-            <input type=submit value=Upload onclick="gotIt()"/>
-          </form>
-      </div>
-      <div id="wikitable2" class="col-md-4">
-          {{bird_data.facts_table | safe }}
+
+      <div class="container col-md-5">
+        <div class="card" style="width: 40%;">
+          <img id="bird" src="{{bird_img}}" class="card-img-top" />
+          <div class="card-body">
+            <h3>{{birdClass}}</h3>
+          </div>
+        </div>  
+        <div class="card" style="width: 40%;">
+          <img id="bird" src="{{bird_loc}}" class="card-img-top" />
+          <div class="card-body">
+              <h3>Migration Pattern</h3>
+          </div>
         </div>
-      <div id="spacer" class="container col-md-5"></div>
+      </div>
+
+      <div id="wikitable2" class="container col-md-4">
+          {{bird_data.facts_table | safe }}
+      </div>
     </div>
 
     <!-- JavaScript -->

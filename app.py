@@ -146,7 +146,7 @@ def predict():
     loc_img = image_tags[3].get("src")
     print(loc_img)
     browser.quit()
-    return render_template('return.html', bird_data=bird_data, bird_img=bird_img, bird_loc=loc_img)
+    return render_template('return.html', bird_data=bird_data, bird_img=bird_img, bird_loc=loc_img, birdClass=birdClass)
 
 if __name__ == "__main__":
     app.run(debug=True)
