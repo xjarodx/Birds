@@ -119,7 +119,7 @@ def predict():
 
     my_url = 'https://en.wikipedia.org/wiki/' + birdClass
     browser.visit(my_url)
-    print(my_url)
+    print(my_url)   
     
     url_html = browser.html
 
@@ -139,7 +139,7 @@ def predict():
     #df1=df['About'].combine_first(df['info'])
     #print(df1)
 
-    bird_facts_html = df3.to_html(index=False, classes="table-light table-hover table-sm")
+    bird_facts_html = df3.to_html(index=False, classes="table-light table-hover table-sm", justify='center')
     bird_data["facts_table"] = bird_facts_html
     print('Got the data')
     

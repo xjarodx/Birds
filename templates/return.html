@@ -11,37 +11,36 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/static/style.css">
 
-    <!--D3 cdn-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+    <!--D3 cdn
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>-->
     
     <title>Bird is the Word</title>
   </head>
 
   <body>
     
-    <div class="header"> 
-      <h1>Header</h1>
+    <div class="header">
+      <h2> </h2>
     </div>
     
     <div class="row">
-      <div class="container col-md-1"></div>
-      <div class="container col-md-3">  
-        <img src="/static/html_Images/birdIcon_thanksForImg.png" width=70%/>
+      <div class="container col-md-3" style="padding-left: 50px; width: 25rem;">  
+        <img src="/static/html_Images/birdIcon_thanksForImg2.png" width=100%/>
       </div>
 
-      <div class="container col-md-2">
-        <div class="card" style="width: 100%;">
-          <img id="bird" src="{{bird_img}}" class="card-img-top" />
+      <div class="container col-md-3">
+        <div class="card" style="width: 25rem;">
+          <img id="bird" style="width: 100%;" src="{{bird_img}}" class="card-img-top" />
           <div class="card-body">
-            <h3>{{birdClass}}</h3>
+            <h5  align="center">{{birdClass}}</h5>
           </div>
         </div>
       </div>
-      <div class="container col-md-2">
-        <div class="card" style="width: 100%;">
-          <img id="bird" src="{{bird_loc}}" class="card-img-top" />
+      <div class="container col-md-3">
+        <div class="card" style="width: 25rem;">
+          <img id="bird" style="width: 100%;" src="{{bird_loc}}" class="card-img-top" />
           <div class="card-body">
-              <h3>Migration Pattern</h3>
+              <h5 align="center">Migration Pattern</h5>
           </div>
         </div>
       </div>
@@ -57,7 +56,7 @@
     <!-- custom first, then jQuery, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript" src="/static/func.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 
