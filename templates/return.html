@@ -18,33 +18,39 @@
   </head>
 
   <body>
-
+    
+    <div class="header"> 
+      <h1>Header</h1>
+    </div>
+    
     <div class="row">
-      <div class="container col-md-1">  
-      </div>
+      <div class="container col-md-1"></div>
       <div class="container col-md-3">  
         <img src="/static/html_Images/birdIcon_thanksForImg.png" width=70%/>
-        <div id="wikitable2" class="container col-md-4">
-          {{bird_data.facts_table | safe }}
-        </div>
       </div>
 
-      <div class="container col-md-5">
-        <div class="card" style="width: 40%;">
+      <div class="container col-md-2">
+        <div class="card" style="width: 100%;">
           <img id="bird" src="{{bird_img}}" class="card-img-top" />
           <div class="card-body">
             <h3>{{birdClass}}</h3>
           </div>
-        </div>  
-        <div class="card" style="width: 40%;">
+        </div>
+      </div>
+      <div class="container col-md-2">
+        <div class="card" style="width: 100%;">
           <img id="bird" src="{{bird_loc}}" class="card-img-top" />
           <div class="card-body">
               <h3>Migration Pattern</h3>
           </div>
         </div>
       </div>
-      <div class="container col-md-3">  
+      <div class="container col-md-2"> 
+          <div id="wikitable2">
+              {{bird_data.facts_table | safe }}
+            </div> 
       </div>
+      <div class="container col-md-1"></div>
     </div>
 
     <!-- JavaScript -->

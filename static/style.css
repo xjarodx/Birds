@@ -41,3 +41,9 @@ body {
     display: inline-block;
     padding:50px;
 }
+
+.header {
+    height: 200px;
+    width:100%;
+    background-color: black;
+}

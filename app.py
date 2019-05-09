@@ -139,7 +139,7 @@ def predict():
     #df1=df['About'].combine_first(df['info'])
     #print(df1)
 
-    bird_facts_html = df3.to_html(index=False, classes="table-hover table-sm")
+    bird_facts_html = df3.to_html(index=False, classes="table-light table-hover table-sm")
     bird_data["facts_table"] = bird_facts_html
     print('Got the data')
     
