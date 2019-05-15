@@ -1,1 +1,5 @@
 /data/CUB_200_2011/*
+
+/data/misc_files/*
+/data/specimen_files/*
+/data/.ipynb_checkpoints/*
